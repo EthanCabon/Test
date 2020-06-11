@@ -78,10 +78,11 @@ for t in range (nt-1):
 
 t = np.linspace(0,nt*dt,nt)
 
+
 fig = plt.figure()
 axes = fig.add_subplot(1,1,1)
 for i in range (nx):
-    axes.plot(t,Ttot[i,:],label='Couche'+str(i))
+    axes.plot(t,Ttot[i,:],label='Layer'+str(i+1))
 axes.set_xlabel("Time (s)",fontsize=16)
 axes.set_ylabel("Temperature (K)",fontsize=16)
 axes.set_title("Evolution of the temperature of the layers")
@@ -90,6 +91,32 @@ axes.set_ylim((Ttot.min(),Ttot.max()))
 axes.legend(loc='best')
 axes.grid()
 plt.show()
+
+"""
+
+# Longueur
+
+Tmoy = (Ttot[0,:]+2*Ttot[1,:]+2*Ttot[2,:]+2*Ttot[3,:]+Ttot[4,:])/8 #Température moyenne par la méthode des trapèzes 
+Eps = alpha*(Tmoy-Textrusion)
+
+fig = plt.figure()
+axes = fig.add_subplot(1,1,1)
+axes.plot(t,Eps)
+axes.set_xlabel("Time (s)",fontsize=16)
+axes.set_ylabel("Deformation",fontsize=16)
+axes.set_title("Evolution of the deformation during the time")
+axes.set_xlim((t.min(),t.max()))
+axes.set_ylim((Eps.min(),Eps.max()))
+axes.grid()
+plt.show()
+
+"""
+
+
+
+
+
+
 
 
 
