@@ -27,7 +27,7 @@ dx = 200*10**-6
 longueur = dx*(nx-1)
 dt = rho*Cp*dx**2/(2*k*10) # Critère de stabilité dt/dx**2 < rho*Cp/(2*k)
 temps = 20
-nt = int(temps/dt)+1
+nt = int(temps/dt)
 
 # Constantes
 C1 = dt*D/dx**2
@@ -70,13 +70,31 @@ T[0] = Tbanc
 # Equation
 
 Ttot = T
-for t in range (nt-1):
+for t in range (nt):
+    T = np.dot(M,T)+Vamb
+    Ttot = np.append(Ttot,T,axis=1)
+
+# 2ème partie : Refroidissement du banc
+
+Tfinal = 295
+Vcooling = 5
+timecooling = (Tbanc-Tfinal)/Vcooling
+nt1 = int(timecooling/dt)
+
+# Equation 2
+Vamb[0]=-Vcooling*dt
+for t in range (nt1):
+    T = np.dot(M,T)+Vamb
+    Ttot = np.append(Ttot,T,axis=1)
+
+Vamb[0]=0
+for t in range (nt):
     T = np.dot(M,T)+Vamb
     Ttot = np.append(Ttot,T,axis=1)
 
 # Figure
 
-t = np.linspace(0,nt*dt,nt)
+t = np.linspace(0,(2*nt+nt1)*dt,2*nt+nt1+1)
 
 
 fig = plt.figure()
