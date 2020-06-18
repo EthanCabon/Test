@@ -1,0 +1,24 @@
+Materials:
+  Mechanical:
+    Coefficient of Thermal Expansion: 0.000041
+    Density: 1250
+  Thermal:
+    Heat Transfer Coefficient: 100
+    Thermal Conductivity: 0.13
+    Heat Capacity: 1800
+
+Experimental Conditions:
+  Extrusion Temperature: 453
+  Bed Temperature: 338
+  Room Temperature: 295
+
+Simulation:
+  dx: 0.0002
+  lenX: 0.0008
+  time: 20
+  Vcooling: 5
+  time2: 10
+
+Plot:
+  Color Interpolation: 50
+  Color Map: "inferno"
